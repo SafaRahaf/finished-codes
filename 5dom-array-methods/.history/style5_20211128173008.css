@@ -1,0 +1,6 @@
+.container{
+    align-items: center;
+    justify-content: center;
+    display: block;
+    background-color: aqua;
+}

@@ -1,0 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    margin: 0;
+    padding: 19px;
+    width: 800px;
+    max-width: 100%;
+}

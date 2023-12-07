@@ -1,0 +1,6 @@
+.container{
+    display: flex;
+    padding: 19px;
+    width: 400px;
+    height: 300px;
+}
