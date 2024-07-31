@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="./style.css"></link>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+        <h1>Wellcome to Bank site</h1>
+    </header>
+      <main>
+        <div class="main">
+       <div class="money-show">
+        <div class="display-result">$ <span id="diposit-total">0</span></div>
+        <div class="display-result">$ <span id="withdraw-total">0</span></div>
+        <div class="display-result">$ <span id="totla-val">200</span></div>
+       </div>
+       <div class="input-show">
+        <div class="display-money">
+          <input type="number" id="diposit-input-show">
+          Money +
+          <button class="button" id="diposit" type="submit">submit</button>
+        </div>
+        <div class="display-money">
+          <input type="number"  id="withdraw-input-show">
+          Money -
+          <button class="button" id="withdraw" type="submit">submit</button>
+        </div>
+       </div>
+      </div>
+      </main>
+    
+    <script src="./utility.js"></script>
+    <script src="./diposit.js"></script>
+    <script src="./withdraw.js"></script>
+  </body>
+</html>
