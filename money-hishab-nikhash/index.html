@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
+      <div class="border p-4 rounded shadow-sm w-100" style="max-width: 500px;">
+        <h1 class="text-center mb-4">Money Hishab Nikash</h1>
+        
+        <div class="input-group mb-3">
+
+        <div class="p-2">
+          <input type="numbers" id="total-income" /><button onclick="totalIncome()" >
+            submit
+          </button>
+          
+          <h5>your income: <strong id="mot-taka">0</strong></h5>
+      </div>
+
+     <div class="p-2">
+       Rent per month: <input type="number" id="rent-input" /><button
+          onclick="rentBtn()"
+       >
+  submit
+ </button>
+</div>
+<div class="p-2">
+cloths and foods per month:
+<input class="" type="number" id="cloths-input" /><button onclick="clothBtn()">
+ submit
+</button>
+</div>
+<div class="m-2 p-2">
+  <h5>
+    total income right new:
+    <strong id="money-u-have-right">0</strong>
+  </h5>
+</div>
+</div>
+</div>
+    <script src="script.js"></script>
+  </body>
+</html>
