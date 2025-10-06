@@ -1,0 +1,93 @@
+
+name: Release UAT (only build)
+
+on: [workflow_dispatch]
+
+env:
+  # service info
+  IMAGE_NAME: orgadmin-webui
+  SERVICE_NAME: orgadmin-webui
+
+  # environment info
+  IDENTITY_POOL_NAME: release-uat
+  GCP_SERVICE_ACCOUNT_NAME: artifact-uploader
+  PROVIDER_NAME: github
+  REGION: us-central1
+  GCP_PROJECT: muallim-uat
+  GCP_PROJECT_NUMBER: 747892608695
+
+  BRANCH: release/uat
+
+  GCP_IAM_IDENTITY_PROVIDER: --
+  CONTAINER_REGISTRY: --
+  IMAGE_URI: --
+  GCP_SERVICE_ACCOUNT: --
+  COMMIT_ID: --
+
+
+  CORE_API_URL: https://api.uat.muallim.icu/
+  FILE_UPLOAD_API_URL: https://blob.api.uat.muallim.icu/
+  FILE_BROWSE_URL: https://muallim-uat-blob.s3.us-east-1.amazonaws.com/
+  NEXT_PUBLIC_FILE_BROWSE_URL: https://muallim-uat-blob.s3.us-east-1.amazonaws.com/
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.BRANCH }}
+          fetch-depth: 1
+
+      - name: Generate Derived Environment Variables
+        id: set-env-vars
+        run: |
+          echo "GCP_IAM_IDENTITY_PROVIDER=projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${IDENTITY_POOL_NAME}/providers/${PROVIDER_NAME}" >> $GITHUB_ENV
+          echo "CONTAINER_REGISTRY=${REGION}-docker.pkg.dev" >> $GITHUB_ENV
+          echo "IMAGE_URI=${REGION}-docker.pkg.dev/${GCP_PROJECT}/${IMAGE_NAME}/release" >> $GITHUB_ENV
+          echo "GCP_SERVICE_ACCOUNT=${GCP_SERVICE_ACCOUNT_NAME}@${GCP_PROJECT}.iam.gserviceaccount.com" >> $GITHUB_ENV
+          echo "COMMIT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Verify Environment Variables
+        run: |
+          echo "GCP_IAM_IDENTITY_PROVIDER: $GCP_IAM_IDENTITY_PROVIDER"
+          echo "CONTAINER_REGISTRY: $CONTAINER_REGISTRY"
+          echo "IMAGE_URI: $IMAGE_URI"
+          echo "GCP_SERVICE_ACCOUNT: $GCP_SERVICE_ACCOUNT"
+          echo "COMMIT_ID: $COMMIT_ID"
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: ${{ env.GCP_IAM_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+
+      - name: Docker Login to Registry
+        run: |
+          yes | gcloud auth configure-docker $CONTAINER_REGISTRY
+
+      - name: Build Container Image
+        id: build-container-image
+        env:
+          CORE_API_URL: ${{ env.CORE_API_URL }}
+          FILE_UPLOAD_API_URL: ${{ env.FILE_UPLOAD_API_URL }}
+          FILE_BROWSE_URL: ${{ env.FILE_BROWSE_URL }}
+        run: |
+          docker build -t ${{ env.IMAGE_URI }}:latest -t ${{ env.IMAGE_URI }}:${{ env.COMMIT_ID }} \
+            --build-arg CORE_API_URL=$CORE_API_URL \
+            --build-arg FILE_UPLOAD_API_URL=$FILE_UPLOAD_API_URL \
+            --build-arg FILE_BROWSE_URL=$FILE_BROWSE_URL .
+
+      - name: Push Container Image to Registry
+        id: upload-container-image
+        run: |
+          docker push ${{ env.IMAGE_URI }}:latest
+          docker push ${{ env.IMAGE_URI }}:${{ env.COMMIT_ID }}

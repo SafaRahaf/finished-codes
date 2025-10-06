@@ -1,0 +1,116 @@
+{
+  "items": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard",
+      "icon": "dashboard",
+      "link": "/dashboard",
+      "submenu": []
+    },
+    {
+      "id": "Class_Management",
+      "title": "Class Management",
+      "icon": "class_management",
+      "link": "/classes",
+      "submenu": [
+        { "title": "All Classes", "link": "/classes/lists" },
+        { "title": "All Subjects", "link": "/comming-soon" },
+        {
+          "title": "Academic Calendar",
+          "link": "/comming-soon"
+        },
+        { "title": "Exams & Results", "link": "/comming-soon" },
+        { "title": "Syllabus", "link": "/comming-soon" },
+        { "title": "Transfers", "link": "/comming-soon" },
+        { "title": "Certificates", "link": "/comming-soon" }
+      ]
+    },
+    {
+      "id": "teacher_management",
+      "title": "Teacher Management",
+      "icon": "teacher_management",
+      "link": "/teachers",
+      "submenu": [
+        { "title": "All Teachers", "link": "/teachers/lists" },
+        { "title": "Teacher Attendance", "link": "/teachers/attendance" }
+      ]
+    },
+    {
+      "id": "student_directory",
+      "title": "Student Directory",
+      "icon": "student_directory",
+      "link": "/students ",
+      "submenu": [
+        { "title": "All Students", "link": "/students/list" },
+        { "title": "Add New Student", "link": "/students/add" },
+        { "title": "Student Attendance", "link": "/students/attendance" }
+      ]
+    },
+    {
+      "id": "parents_hub",
+      "title": "Parents Hub",
+      "icon": "parents_hub",
+      "link": "/parents",
+      "submenu": []
+    },
+    {
+      "id": "hr_management",
+      "title": "HR Management",
+      "icon": "hr_management",
+      "submenu": [
+        {
+          "title": "Employee Directory",
+          "link": "/hr-management/employee-directory"
+        },
+        { "title": "Payroll", "link": "/hr-management/payroll" },
+        { "title": "Attendance", "link": "/hr-management/attendance" }
+      ],
+      "link": "/hr-management"
+    },
+    {
+      "id": "subscription",
+      "title": "Subscription",
+      "icon": "subscription",
+      "link": "/subscription",
+      "submenu": []
+    },
+    {
+      "id": "finance",
+      "title": "Finance",
+      "icon": "finance",
+      "submenu": [],
+      "link": "/finance"
+    },
+    {
+      "id": "user_management",
+      "title": "User Management",
+      "icon": "user_management",
+      "submenu": [
+        { "title": "Users", "link": "/users" },
+        { "title": "Roles", "link": "/roles" }
+      ],
+      "link": "/users"
+    },
+    {
+      "id": "branch_management",
+      "title": "Branch Management",
+      "icon": "branch_management",
+      "submenu": [],
+      "link": "/branch"
+    },
+    {
+      "id": "settings",
+      "title": "Settings",
+      "icon": "settings",
+      "submenu": [],
+      "link": "/settings"
+    },
+    {
+      "id": "help",
+      "title": "Help",
+      "icon": "help",
+      "submenu": [],
+      "link": "#"
+    }
+  ]
+}

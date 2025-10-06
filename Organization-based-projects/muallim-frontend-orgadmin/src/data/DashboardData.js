@@ -1,0 +1,276 @@
+export const easyAccess = [
+  {
+    id: 1,
+    icon: "/assets/img/icons/Teacher Attendance.png",
+    title: "Teacher Attendance",
+    link: "/teachers/attendance",
+  },
+  {
+    id: 2,
+    icon: "/assets/img/icons/progress.svg",
+    title: "Teacher List",
+    link: "/teachers/lists",
+  },
+  {
+    id: 3,
+    icon: "/assets/img/icons/StudentAttendance.png",
+    title: "Student Attendance",
+    link: "",
+  },
+  {
+    id: 4,
+    icon: "/assets/img/icons/Student List.png",
+    title: "Student List",
+    link: "/students/list",
+  },
+  {
+    id: 5,
+    icon: "/assets/img/icons/Guardians Hub.png",
+    title: "Guardians Hub",
+    link: "/parents",
+  },
+  {
+    id: 6,
+    icon: "/assets/img/icons/User List.png",
+    title: "User List",
+    link: "/users",
+  },
+  {
+    id: 7,
+    icon: "/assets/img/icons/Profile Settings.png",
+    title: "Profile Settings",
+    link: "/settings",
+  },
+  {
+    id: 8,
+    icon: "/assets/img/icons/Organization Settings.png",
+    title: "Organization Settings",
+    link: "/settings",
+  },
+];
+
+export const events = [
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#B6BFF0",
+    title: "Parents meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FC9F9F",
+    title: "1st Semester Exam",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#98F3A1",
+    title: "1st Semester Award Ceremony",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#9CB4CC",
+    title: "Field Trip",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+  {
+    id: 1,
+    color: "#FDAE51",
+    title: "Student meeting",
+    date: "Mon, 06 April, 2023",
+    hijriDate: "14 Rabi-al-Ula 1445",
+    time: "10:30 am",
+  },
+];
+
+export const appointments = [
+  {
+    id: 1,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 2,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 3,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 4,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 5,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 6,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 7,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 8,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 9,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+  {
+    id: 10,
+    from: "Ahsan Ullah",
+    studentInfo: "Ahmad Ullah (Full-Time Hifz, Grou...)",
+    time: "04:30 | 25 May 2023",
+  },
+];
+
+export const examNotice = [
+  {
+    title: "1st Term Exam Notice",
+    time: "04:30",
+    date: "25 May 2023",
+  },
+  {
+    title: "Field Trip Notice",
+    time: "04:30",
+    date: "25 May 2023",
+  },
+  {
+    title: "School Rules Update",
+    time: "04:30",
+    date: "25 May 2023",
+  },
+  {
+    title: "1st Term Exam Notice",
+    time: "04:30",
+    date: "25 May 2023",
+  },
+];
+
+export const TeacherDashboardHeaderData = [
+  {
+    value: 0,
+    title: "Total Classes",
+  },
+  {
+    value: 0,
+    title: "Total Teachers",
+    value1: 0,
+    title1: "active",
+    value2: 0,
+    title2: "on leave",
+    color1: "#9CB4CC",
+    color2: "#C3B091",
+  },
+  {
+    value: 0,
+    title: "New Applications",
+  },
+  {
+    value: 0,
+    title: "Incomplete Tasks",
+  },
+];

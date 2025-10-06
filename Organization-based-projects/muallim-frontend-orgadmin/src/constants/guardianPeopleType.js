@@ -1,0 +1,48 @@
+// export const guardianType = {
+//   FATHER: "father",
+//   MOTHER: "mother",
+//   STEPFATHER: "stepfather",
+//   STEPMOTHER: "stepmother",
+//   GRANDFATHER: "grandfather",
+//   GRANDMOTHER: "grandmother",
+//   UNCLE: "uncle",
+//   AUNT: "aunt",
+//   BROTHER: "brother",
+//   SISTER: "sister",
+// };
+
+export const GuardianType = {
+  FATHER: "father",
+  MOTHER: "mother",
+  STEP_FATHER: "step_father",
+  STEP_MOTHER: "step_mother",
+  GRANDFATHER: "grandfather",
+  GRANDMOTHER: "grandmother",  
+  ADOPTED_FATHER: 'adopted_father',
+  ADOPTED_MOTHER: 'adopted_mother',
+  HUSBAND: 'husband',
+  WIFE: 'wife',
+  UNCLE: "uncle",
+  AUNT: "aunt",
+  BROTHER: "brother",
+  SISTER: "sister",
+  OTHER: "other",
+};
+
+export const LegalGuardianType = {
+  FATHER: "father",
+  MOTHER: "mother",
+  FATHER_AND_MOTHER: "father_&_mother",
+  STEP_FATHER: "step_father",
+  STEP_MOTHER: "step_mother",
+  GRANDFATHER: "grandfather",
+  GRANDMOTHER: "grandmother",
+  UNCLE: "uncle",
+  AUNT: "aunt",
+  BROTHER: "brother",
+  SISTER: "sister", 
+  ADOPTED_FATHER: 'adopted_father',
+  ADOPTED_MOTHER: 'adopted_mother',
+  HUSBAND: 'husband',
+  WIFE: 'wife',
+};

@@ -1,0 +1,92 @@
+{
+  "items": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard",
+      "icon": "dashboard",
+      "link": "/",
+      "submenu": []
+    },
+    {
+      "id": "class_management",
+      "title": "Class Management",
+      "icon": "class_management",
+      "link": "/classes",
+      "submenu": [
+        { "title": "All Classes", "link": "/classes/lists" },
+        { "title": "All Subjects", "link": "#" },
+        {
+          "title": "Academic Calendar",
+          "link": "#"
+        },
+        { "title": "Exams & Results", "link": "#" },
+        { "title": "Syllabus", "link": "#" },
+        { "title": "Transfers", "link": "#" },
+        { "title": "Certificates", "link": "#" }
+      ]
+    },
+    {
+      "id": "teacher_management",
+      "title": "Teacher Management",
+      "icon": "teacher_management",
+      "link": "#",
+      "submenu": []
+    },
+    {
+      "id": "student_directory",
+      "title": "Student Directory",
+      "icon": "student_directory",
+      "link": "#",
+      "submenu": []
+    },
+    {
+      "id": "parents_hub",
+      "title": "Parents' Hub",
+      "icon": "parents_hub",
+      "link": "#",
+      "submenu": []
+    },
+    {
+      "id": "hr_management",
+      "title": "HR Management",
+      "icon": "hr_management",
+      "submenu": [],
+      "link": "#"
+    },
+    {
+      "id": "subscription",
+      "title": "Subscriptions",
+      "icon": "subscription",
+      "link": "#",
+      "submenu": []
+    },
+    {
+      "id": "finance",
+      "title": "Finance",
+      "icon": "finance",
+      "submenu": [],
+      "link": "#"
+    },
+    {
+      "id": "user_management",
+      "title": "User Management",
+      "icon": "user_management",
+      "submenu": [],
+      "link": "#"
+    },
+    {
+      "id": "branch_management",
+      "title": "Branch Management",
+      "icon": "branch_management",
+      "submenu": [],
+      "link": "#"
+    },
+    {
+      "id": "settings",
+      "title": "Settings",
+      "icon": "settings",
+      "submenu": [],
+      "link": "#"
+    }
+  ]
+}

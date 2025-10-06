@@ -1,0 +1,69 @@
+{
+  "people": {
+    "profile_picture": "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg",
+    "dob": "2025-02-15",
+    "gender": "male",
+    "bio": " ltest test tews",
+    "joining_date": "2025-02-13",
+    "additional_email": "nuxahufiv@mailinator.com",
+    "mobile_no": "1876666353"
+  },
+  "people_identifications": [
+    {
+      "identification_type_id": 1,
+      "identification_code": "78"
+    }
+  ],
+  "people_experiences": [
+    {
+      "joining_date": "2025-02-04",
+      "ending_date": "2025-03-19",
+      "experience_year": 0,
+      "organization": {
+        "is_exist": true,
+        "id": 11
+      },
+      "designation": {
+        "is_exist": true,
+        "id": 7
+      }
+    }
+  ],
+  "people_education": [
+    {
+      "completion_year": "3847",
+      "degree": {
+        "is_exist": true,
+        "id": 7
+      },
+      "organization": {
+        "is_exist": true,
+        "id": 11
+      }
+    }
+  ],
+  "people_location": {
+    "location_name": "hourse 4, house 3",
+    "location_parent_id": 8,
+    "location_type_id": 18,
+    "lat": "0.0",
+    "long": "0.0"
+  },
+  "payment_info": {
+    "bank_name": "city",
+    "account_no": "78984",
+    "account_name": "city",
+    "account_type": "89483",
+    "routing_number": "27899"
+  },
+  "login_information": {
+    "email": "rafiqulislamsuvobd+56@gmail.com",
+    "password": "Suvo1234#"
+  },
+  "people_contacts": [
+    {
+      "contact": "https://www.pajymydizolefaj.com",
+      "contact_type_id": 5
+    }
+  ]
+}

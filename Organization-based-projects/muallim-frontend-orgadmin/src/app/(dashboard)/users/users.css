@@ -1,0 +1,5 @@
+@media screen and (max-width: 700px) {
+    .w-full.lg\:px-8.lg\:pt-\[156px\].px-5.pt-\[110px\].pb-10 {
+        width: 88%;
+    }
+}

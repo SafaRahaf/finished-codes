@@ -1,0 +1,154 @@
+
+name: "Release Dev"
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to deploy from'
+        required: true
+        default: 'release/dev'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: dev
+    outputs:
+      IMAGE_FULL_URI: ${{ steps.prepare-metadata.outputs.IMAGE_FULL_URI }}
+      IMAGE_FULL_NAME: ${{ steps.prepare-metadata.outputs.IMAGE_FULL_NAME }}
+      IMAGE_TAG: ${{ steps.prepare-metadata.outputs.IMAGE_TAG }}
+    permissions:
+      contents: read
+    env:
+      # OCI_AUTH_TOKEN: ${{ secrets.OCI_AUTH_TOKEN }}
+      OCI_USERNAME: ${{ vars.OCI_USERNAME }}
+      OCI_REGION: ${{ vars.OCI_REGION }}
+      OCIR_NAMESPACE: ${{ vars.OCIR_NAMESPACE }}
+      APP_NAME: ${{ vars.APP_NAME }}
+      BRANCH_NAME: ${{ vars.BRANCH_NAME }}
+
+      CORE_API_URL: ${{ vars.CORE_API_URL }}
+      FILE_UPLOAD_API_URL: ${{ vars.FILE_UPLOAD_API_URL }}
+      FILE_BROWSE_URL: ${{ vars.FILE_BROWSE_URL }}
+
+    steps:
+      - name: Validate Branch Name Pattern
+        run: |
+          BRANCH_NAME="${{ github.event.inputs.branch }}"
+          if [[ ! "$BRANCH_NAME" =~ ^rls/dev/.*$ && "$BRANCH_NAME" != "release/dev" ]]; then
+            echo "::error::Branch name '$BRANCH_NAME' does not match the required patterns: 'rls/dev/*' or 'release/dev'."
+            exit 1
+          fi
+          echo "Branch name '$BRANCH_NAME' is valid for deployment."
+
+      - name: Checkout Application Repository
+        uses: actions/checkout@v4
+        with:
+          # ref: ${{ env.BRANCH_NAME }}
+          # ref: ${{ env.BRANCH_NAME == 'main' && 'main' || github.event.inputs.branch }}
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Read version from package.json
+        id: read-version
+        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_OUTPUT
+
+      - name: Generate Short Commit SHA
+        id: generate-sha
+        run: echo "short_sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Sanitize Branch Name
+        id: sanitize-branch
+        run: |
+          SANITIZED_BRANCH=$(echo "${{ github.event.inputs.branch }}" | sed 's/[^a-zA-Z0-9._-]/-/g')
+          echo "SANITIZED_BRANCH=$SANITIZED_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Prepare Image Metadata
+        id: prepare-metadata
+        run: |
+          # 1. Define the base image name (URI without the tag)
+          IMAGE_FULL_NAME="${{ env.OCI_REGION }}.ocir.io/${{ env.OCIR_NAMESPACE }}/${{ env.APP_NAME }}"
+          echo "IMAGE_FULL_NAME=$IMAGE_FULL_NAME" >> $GITHUB_OUTPUT
+
+          # 2. Create the semantic version tag (e.g., 1.2.3-a1b2c3d)
+          VERSION_TAG="${{ steps.read-version.outputs.version }}-${{ steps.generate-sha.outputs.short_sha }}-b-${{ steps.sanitize-branch.outputs.SANITIZED_BRANCH }}"
+          echo "IMAGE_TAG=$VERSION_TAG" >> $GITHUB_OUTPUT
+
+          # 3. Define the full image name with the new version tag
+          FULL_IMAGE_NAME="$IMAGE_FULL_NAME:$VERSION_TAG"
+          echo "IMAGE_FULL_URI=$FULL_IMAGE_NAME" >> $GITHUB_OUTPUT
+
+      - name: Log in to OCIR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.OCI_REGION }}.ocir.io
+          username: "${{ env.OCIR_NAMESPACE }}/${{ env.OCI_USERNAME }}"
+          password: ${{ secrets.OCI_AUTH_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.prepare-metadata.outputs.IMAGE_FULL_URI }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            CORE_API_URL=${{ env.CORE_API_URL }}
+            FILE_UPLOAD_API_URL=${{ env.FILE_UPLOAD_API_URL }}
+            FILE_BROWSE_URL=${{ env.FILE_BROWSE_URL }}
+
+  update-gitops-repository:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      GITOPS_REPO: ${{ vars.GITOPS_REPO }}
+      GITOPS_REPO_USER: ${{ vars.GITOPS_REPO_USER }}
+      # GITOPS_REPO_USER_PAT: ${{ vars.GITOPS_REPO_USER_PAT }}
+      GITOPS_REPO_COMMIT_EMAIL: ${{ vars.GITOPS_REPO_COMMIT_EMAIL }}
+      GITOPS_MANIFEST_PATH: ${{ vars.GITOPS_MANIFEST_PATH }}
+      IMAGE_FULL_NAME: ${{ needs.build.outputs.IMAGE_FULL_NAME }}
+      IMAGE_FULL_URI: ${{ needs.build.outputs.IMAGE_FULL_URI }}
+      IMAGE_TAG: ${{ needs.build.outputs.IMAGE_TAG }}
+      APP_NAME: ${{ vars.APP_NAME }}
+    steps:
+      - name: Checkout GitOps Repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.GITOPS_REPO }}
+          token: ${{ secrets.GITOPS_REPO_USER_PAT }}
+          user: ${{ vars.GITOPS_REPO_USER }}
+          path: gitops
+          ref: main
+
+      - name: Update Image Tag in Kubernetes Manifest
+        run: |
+          sed -i "s#  uri: .*#  uri: ${{ env.IMAGE_FULL_URI }}#" gitops/${{ env.GITOPS_MANIFEST_PATH }}
+
+      - name: Commit and Push Changes
+        run: |
+          cd gitops
+          git config --global user.name "${{ env.GITOPS_REPO_USER }}"
+          git config --global user.email "${{ env.GITOPS_REPO_COMMIT_EMAIL }}"
+          git add .
+
+          if git diff --staged --quiet; then
+            echo "No configuration changes to commit."
+          else
+            # Commit message uses the clean version tag for clarity
+            git commit -m "feat(deploy): Update ${{ env.APP_NAME }} to version ${{ env.IMAGE_TAG }}"
+            git push
+          fi
+
+      - name: Verify Manifest Changes
+        run: |
+          echo "--- values.yaml content after sed ---"
+          cat gitops/${{ env.GITOPS_MANIFEST_PATH }}
+          echo "------------------------------------"

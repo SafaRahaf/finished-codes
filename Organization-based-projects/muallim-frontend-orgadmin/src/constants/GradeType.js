@@ -1,0 +1,16 @@
+export const GradeType = {
+  PRE_K: "Pre-K",
+  KINDERGARTEN: "Kindergarten / KG",
+  GRADE_1: "First",
+  GRADE_2: "Second",
+  GRADE_3: "Third",
+  GRADE_4: "Fourth",
+  GRADE_5: "Fifth",
+  GRADE_6: "Sixth",
+  GRADE_7: "Seventh",
+  GRADE_8: "Eighth",
+  GRADE_9: "Ninth",
+  GRADE_10: "Tenth",
+  GRADE_11: "Eleventh",
+  GRADE_12: "Twelfth",
+};

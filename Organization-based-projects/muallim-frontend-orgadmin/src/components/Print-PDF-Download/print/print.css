@@ -1,0 +1,515 @@
+/* Add these rules at the top of the file, outside the print media query */
+.print-only {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: white;
+  z-index: 9999;
+}
+
+/* Add these styles for PDF content */
+.pdf-content {
+  display: none;
+  width: 100%;
+}
+
+.pdf-content.print-content {
+  display: block;
+}
+
+/* PDF page container styles */
+.pdf-page {
+  width: 100%;
+  max-width: 210mm; /* A4 width */
+  margin: 0 auto;
+  background: white;
+  padding: 10mm;
+  box-sizing: border-box;
+}
+
+/* PDF content specific styles */
+.pdf-content .print-content {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Monthly view needs full width for landscape */
+.pdf-content .print-content:has(.monthly-attendance-print) {
+  max-width: none;
+  width: 100%;
+}
+
+@media print {
+  /* Hide everything except print container */
+  body > *:not(.print-only) {
+    display: none !important;
+  }
+
+  /* Show print container */
+  .print-only {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    z-index: 9999 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* PDF page container for print */
+  .pdf-page {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    page-break-after: auto !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Ensure print content is visible */
+  .print-content {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Reset any parent element styles */
+  .print-content * {
+    visibility: visible !important;
+  }
+
+  /* Table specific styles */
+  table {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  tr,
+  td,
+  th {
+    display: table-row !important;
+    visibility: visible !important;
+    page-break-inside: avoid !important;
+    border: 1px solid #ddd !important;
+  }
+
+  /* Ensure images are visible */
+  img {
+    display: inline-block !important;
+    visibility: visible !important;
+    height: auto !important;
+  }
+
+  /* Reset page margins */
+  @page {
+    margin: 1cm;
+    size: auto;
+  }
+
+  .print-desktop {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Table container styles */
+  .overflow-x-auto {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+  }
+
+  /* Table styles */
+  table {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    table-layout: fixed !important;
+  }
+
+  /* Column width distribution */
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 25% !important;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 15% !important;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 20% !important;
+  }
+
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 20% !important;
+  }
+
+  th:nth-child(5),
+  td:nth-child(5) {
+    width: 20% !important;
+  }
+
+  /* Remove any card or container padding/margins */
+  .card {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Hide mobile view */
+  .print-mobile {
+    display: none !important;
+  }
+
+  /* Table cell styles */
+  th,
+  td {
+    padding: 8px !important;
+    text-align: left !important;
+    color: #000 !important;
+    font-size: 12px !important;
+    vertical-align: middle !important;
+  }
+
+  th {
+    background-color: #f5f5f5 !important;
+    font-weight: bold !important;
+    color: #000 !important;
+  }
+
+  /* Hide interactive elements but keep content visible */
+  button,
+  input,
+  select,
+  .no-print,
+  .ant-dropdown,
+  .ant-tabs-nav,
+  .ant-space {
+    display: none !important;
+    border: #000 1px solid;
+  }
+
+  /* Keep links visible but remove styling */
+  a {
+    text-decoration: none !important;
+    color: #000 !important;
+  }
+
+  /* Clean up backgrounds and shadows */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Status indicator styles */
+  .w-\[10px\],
+  .h-\[10px\] {
+    width: 8px !important;
+    height: 8px !important;
+    display: inline-block !important;
+    margin-right: 4px !important;
+  }
+
+  /* Ensure proper page breaks */
+  table {
+    page-break-inside: auto !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  /* Ensure text content is visible */
+  span,
+  p,
+  div {
+    color: #000 !important;
+    visibility: visible !important;
+    display: inline-block !important;
+  }
+
+  /* Fix for teacher name display */
+  td a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  td a span {
+    display: inline-block !important;
+    visibility: visible !important;
+    white-space: normal !important;
+  }
+
+  /* Status text alignment */
+  .flex.items-center.gap-2 {
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  /* Remove any unnecessary padding */
+  .py-3 {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .pl-3 {
+    padding-left: 8px !important;
+  }
+
+  .daily-attendance-print {
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  .daily-attendance-print th,
+  .daily-attendance-print td {
+    padding: 8px !important;
+    font-size: 11px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+
+  /* Column width distribution for daily attendance */
+  .daily-attendance-print th:nth-child(1),
+  .daily-attendance-print td:nth-child(1) {
+    width: 20% !important; /* Teacher name column */
+  }
+
+  .daily-attendance-print th:nth-child(2),
+  .daily-attendance-print td:nth-child(2),
+  .daily-attendance-print th:nth-child(3),
+  .daily-attendance-print td:nth-child(3),
+  .daily-attendance-print th:nth-child(4),
+  .daily-attendance-print td:nth-child(4),
+  .daily-attendance-print th:nth-child(5),
+  .daily-attendance-print td:nth-child(5),
+  .daily-attendance-print th:nth-child(6),
+  .daily-attendance-print td:nth-child(6),
+  .daily-attendance-print th:nth-child(7),
+  .daily-attendance-print td:nth-child(7),
+  .daily-attendance-print th:nth-child(8),
+  .daily-attendance-print td:nth-child(8),
+  .daily-attendance-print th:nth-child(9),
+  .daily-attendance-print td:nth-child(9) {
+    width: 10% !important; /* Other columns */
+  }
+
+  /* Ensure the teacher name and image display properly */
+  .daily-attendance-print td:first-child .flex {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .daily-attendance-print td:first-child img {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  /* Hide the approval dropdown in print */
+  .daily-attendance-print .ant-select {
+    display: none !important;
+  }
+
+  /* Ensure proper text wrapping for reason columns */
+  .daily-attendance-print td:nth-child(4),
+  .daily-attendance-print td:nth-child(7) {
+    max-width: 120px !important;
+  }
+
+  .status-cell {
+    width: 17px !important;
+    height: 17px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 9px !important;
+    font-weight: bold !important;
+  }
+
+  /* Ensure proper page breaks for both views */
+  .daily-attendance-print,
+  .monthly-attendance-print {
+    page-break-inside: auto !important;
+  }
+
+  .daily-attendance-print tr,
+  .monthly-attendance-print tr {
+    page-break-inside: avoid !important;
+  }
+
+  /* Add specific styles for PDF content when printing */
+  .pdf-content {
+    display: block !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  /* Ensure table content is visible */
+  .daily-attendance-print,
+  .monthly-attendance-print {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  .daily-attendance-print th,
+  .daily-attendance-print td {
+    padding: 8px !important;
+    font-size: 12px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    border: 1px solid #ddd !important;
+  }
+
+  .print-content table,
+  .print-content thead,
+  .print-content tbody,
+  .print-content tfoot {
+    display: table !important;
+    width: 100% !important;
+  }
+  .print-content tr {
+    display: table-row !important;
+  }
+  .print-content th,
+  .print-content td {
+    display: table-cell !important;
+    vertical-align: middle !important;
+  }
+
+  .individual-attendance-print {
+    width: 100% !important;
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+  }
+
+  .individual-attendance-print th,
+  .individual-attendance-print td {
+    padding: 8px !important;
+    font-size: 12px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    border: 1px solid #ddd !important;
+    width: 80px !important;
+  }
+
+  .individual-attendance-print th {
+    background-color: #f5f5f5 !important;
+    font-weight: bold !important;
+    color: #000 !important;
+  }
+
+  .print-content .grid {
+    display: grid !important;
+    grid-template-columns: 2fr 1.2fr 1.5fr 1.5fr 1fr !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+  .print-content .flex {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+  .print-content img.rounded-full {
+    object-fit: cover !important;
+    border-radius: 50% !important;
+  }
+  .print-content span[style*="border-radius: 50%"] {
+    display: inline-block !important;
+    width: 10px !important;
+    height: 10px !important;
+    margin-right: 4px !important;
+    vertical-align: middle !important;
+  }
+}
+
+.print-content {
+  background: #fff !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+
+.print-content table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+}
+
+.print-content th,
+.print-content td {
+  padding: 9px 6px !important;
+  font-size: 10px !important;
+  border: 1px solid #e5e7eb !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+}
+
+.print-content th {
+  background: #f9fafb !important;
+  font-weight: bold !important;
+}
+
+.print-content .flex.items-center.gap-2 {
+  gap: 5px !important;
+}
+
+.print-content img.rounded-full {
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+.print-content span[style*="border-radius: 50%"] {
+  display: inline-block !important;
+  width: 10px !important;
+  height: 10px !important;
+  margin-right: 4px !important;
+  vertical-align: middle !important;
+}
